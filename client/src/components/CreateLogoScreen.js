@@ -7,13 +7,19 @@ const ADD_LOGO = gql`
     mutation AddLogo(
         $text: String!,
         $color: String!,
-        $fontSize: Int!) {
+        $backgroundColor: String!,
+        $borderColor: String!,
+        $fontSize: Int!,
+        $borderRadius: Int!,
+        $borderWidth: Int!,
+        $padding: Int!,
+        $margin: Int!) {
         addLogo(
             text: $text,
             color: $color,
-            fontSize: $fontSize,
             backgroundColor: $backgroundColor,
             borderColor: $borderColor,
+            fontSize: $fontSize,
             borderRadius: $borderRadius,
             borderWidth: $borderWidth,
             padding: $padding,
@@ -26,7 +32,7 @@ const ADD_LOGO = gql`
 class CreateLogoScreen extends Component {
 
     render() {
-        let text, color, fontSize, backgroundColor, borderColor, borderRadius, borderWidth, padding, margin;
+        let text, color, backgroundColor, borderColor, fontSize, borderRadius, borderWidth, padding, margin;
         return (
             <Mutation mutation={ADD_LOGO} onCompleted={() => this.props.history.push('/')}>
                 {(addLogo, { loading, error }) => (
@@ -41,14 +47,15 @@ class CreateLogoScreen extends Component {
                             <div className="panel-body">
                                 <form onSubmit={e => {
                                     e.preventDefault();
-                                    addLogo({ variables: { text: text.value, color: color.value, fontSize: parseInt(fontSize.value), backgroundColor: backgroundColor.value, 
-                                        borderColor: borderColor.value, borderRadius: parseInt(borderRadius.value), borderWidth: parseInt(borderWidth.value),
+                                    addLogo({ variables: { text: text.value, color: color.value, backgroundColor: backgroundColor.value, 
+                                        borderColor: borderColor.value, fontSize: parseInt(fontSize.value), 
+                                        borderRadius: parseInt(borderRadius.value), borderWidth: parseInt(borderWidth.value),
                                         padding: parseInt(padding.value), margin: parseInt(margin.value) } });
                                     text.value = "";
                                     color.value = "";
-                                    fontSize.value = "";
                                     backgroundColor.value = "";
                                     borderColor.value = "";    
+                                    fontSize.value = "";
                                     borderRadius.value = "";
                                     borderWidth.value = "";
                                     padding.value = "";

@@ -22,14 +22,14 @@ var logoType = new GraphQLObjectType({
             color: {
                 type: GraphQLString
             },
-            fontSize: {
-                type: GraphQLInt
-            },
             backgroundColor: {
                 type: GraphQLString
             },
             borderColor: {
                 type: GraphQLString
+            },
+            fontSize: {
+                type: GraphQLInt
             },
             borderRadius: {
                 type: GraphQLInt
@@ -97,14 +97,14 @@ var mutation = new GraphQLObjectType({
                     color: {
                         type: new GraphQLNonNull(GraphQLString)
                     },
-                    fontSize: {
-                        type: new GraphQLNonNull(GraphQLInt)
-                    },
                     backgroundColor: {
                         type: new GraphQLNonNull(GraphQLString)
                     },
                     borderColor: {
                         type: new GraphQLNonNull(GraphQLString)
+                    },
+                    fontSize: {
+                        type: new GraphQLNonNull(GraphQLInt)
                     },
                     borderRadius: {
                         type: new GraphQLNonNull(GraphQLInt)
@@ -141,14 +141,14 @@ var mutation = new GraphQLObjectType({
                     color: {
                         type: new GraphQLNonNull(GraphQLString)
                     },
-                    fontSize: {
-                        type: new GraphQLNonNull(GraphQLInt)
-                    },
                     backgroundColor: {
                         type: new GraphQLNonNull(GraphQLString)
                     },
                     borderColor: {
                         type: new GraphQLNonNull(GraphQLString)
+                    },
+                    fontSize: {
+                        type: new GraphQLNonNull(GraphQLInt)
                     },
                     borderRadius: {
                         type: new GraphQLNonNull(GraphQLInt)
@@ -164,7 +164,8 @@ var mutation = new GraphQLObjectType({
                     }
                 },
                 resolve(root, params) {
-                    return LogoModel.findByIdAndUpdate(params.id, { text: params.text, color: params.color, fontSize: params.fontSize, lastUpdate: new Date() }, function (err) {
+                    return LogoModel.findByIdAndUpdate(params.id, { text: params.text, color: params.color, backgroundColor: params.backgroundColor, borderColor: params.borderColor, fontSize: params.fontSize, 
+                        borderRadius: params.borderRadius, borderWidth: params.borderWidth, padding: params.padding, margin: params.margin, lastUpdate: new Date() }, function (err) {
                         if (err) return next(err);
                     });
                 }

@@ -36,7 +36,11 @@ class HomeScreen extends Component {
                             </div>
                             <div className="col s8">
                                 <div id="home_banner_container">
-                                    List Maker
+                                    <button className="createNew"
+                                        style={{ cursor: "pointer" }}
+                                        onClick={this.handleAddNewLogo}>
+                                        Create a New Logo
+                                    </button>
                                 </div>
                                 <div>
                                     <Link id="add_logo_button" to="/create">Add Logo</Link>
