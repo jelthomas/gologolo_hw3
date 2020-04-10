@@ -38,12 +38,16 @@ class CreateLogoScreen extends Component {
                 {(addLogo, { loading, error }) => (
                     <div className="container">
                         <div className="panel panel-default">
-                            <div className="panel-heading">
-                                <h4><Link to="/">Home</Link></h4>
-                                <h3 className="panel-title">
-                                    Create Logo
+                            <nav>
+                                <div className="nav-wrapper">
+                                    <div className="panel-heading">
+                                        <div><Link style={{color:"white"}} id="homeButton" to="/">Home</Link></div>
+                                    </div>
+                                </div>
+                            </nav>
+                            <h3 className="panel-title">
+                                Create Logo
                             </h3>
-                            </div>
                             <div className="panel-body">
                                 <form onSubmit={e => {
                                     e.preventDefault();
