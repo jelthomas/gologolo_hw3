@@ -42,12 +42,16 @@ class ViewLogoScreen extends Component {
                     return (
                         <div className="container">
                             <div className="panel panel-default">
-                                <div className="panel-heading">
-                                    <h4><Link to="/">Home</Link></h4>
-                                    <h3 className="panel-title">
+                                <nav>
+                                    <div className="nav-wrapper">
+                                        <div className="panel-heading">
+                                            <div><Link style={{color:"white"}} id="homeButton" to="/">Home</Link></div>
+                                        </div>
+                                    </div>
+                                </nav>
+                                <h3 className="panel-title">
                                         View Logo
-                                    </h3>
-                                </div>
+                                </h3>
                                 <div className="panel-body">
                                     <dl>
                                         <dt>Text:</dt>
