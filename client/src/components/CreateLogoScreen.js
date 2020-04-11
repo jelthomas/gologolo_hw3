@@ -221,9 +221,9 @@ class CreateLogoScreen extends Component {
                             </div>
                             <div className="col s8" style={{width:"66.66666%"}}> 
                                 <div>
-                                    <div className="pre" style={ styles.container }>
+                                    <pre className="logo" style={ styles.container }>
                                         {this.state.tempText}
-                                    </div>
+                                    </pre>
                                 </div>
                             </div>
                             </div>

@@ -115,3 +115,9 @@ nav .nav-wrapper {
   margin-right: auto;
   margin-bottom: 20px;
 }
+
+.logo{
+  width: fit-content;
+  text-align: center;
+  display: inline-block;
+}
