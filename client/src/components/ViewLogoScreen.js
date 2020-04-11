@@ -31,14 +31,32 @@ const DELETE_LOGO = gql`
 `;
 
 class ViewLogoScreen extends Component {
+    constructor() {
+        super();
+
+        // WE'LL MANAGE THE UI CONTROL
+        // VALUES HERE
+        this.state = {
+            tempText: null,
+            text: null,
+            color : "#FFFFFF",
+            fontSize : 24,
+            backgroundColor: "#FF0000",
+            borderColor: "#FFFFFF",
+            borderRadius: 0,
+            borderWidth: 0,
+            margin: 0,
+            padding: 0
+        }
+    }
 
     render() {
+        
         return (
             <Query pollInterval={500} query={GET_LOGO} variables={{ logoId: this.props.match.params.id }}>
                 {({ loading, error, data }) => {
                     if (loading) return 'Loading...';
                     if (error) return `Error! ${error.message}`;
-
                     return (
                         <div className="container">
                             <nav>
@@ -51,6 +69,7 @@ class ViewLogoScreen extends Component {
                             <h3 className="panel-title">
                                 View Logo
                             </h3>
+                            <div className = "row">
                             <div className="panel panel-default" style={{width:"33.3333%"}}>
                                 <div className="panel-body">
                                     <dl>
@@ -92,6 +111,19 @@ class ViewLogoScreen extends Component {
                                         )}
                                     </Mutation>
                                 </div>
+                            </div>
+                            <div className="col s8" style={{width:"66.66666%"}}> 
+                                <div>
+                                    <pre className="logo" style={{text: data.logo.text, color: data.logo.color, fontSize: data.logo.fontSize,
+                                background: data.logo.backgroundColor,
+                                borderColor: data.logo.borderColor,
+                                borderRadius: data.logo.borderRadius,
+                                borderWidth: data.logo.borderWidth,
+                                padding: data.logo.padding, margin: data.logo.margin, borderStyle: "solid"}}>
+                                        {data.logo.text}
+                                    </pre>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     );
