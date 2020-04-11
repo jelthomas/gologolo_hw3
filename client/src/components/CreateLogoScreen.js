@@ -30,9 +30,103 @@ const ADD_LOGO = gql`
 `;
 
 class CreateLogoScreen extends Component {
+    constructor() {
+        super();
+
+        // WE'LL MANAGE THE UI CONTROL
+        // VALUES HERE
+        this.state = {
+            tempText: 'New Logo',
+            text: "",
+            color : "#FFFFFF",
+            fontSize : 24,
+            backgroundColor: "#FF0000",
+            borderColor: "#FFFFFF",
+            borderRadius: 0,
+            borderWidth: 0,
+            margin: 0,
+            padding: 0
+        }
+    }
+
+    handleInput = (event) => {
+        console.log(this.state.tempText);
+        this.setState({tempText: event.target.value, backgroundColor: this.state.backgroundColor, color: this.state.color, 
+            fontSize: this.state.fontSize, borderRadius: this.state.borderRadius, borderWidth: this.state.borderWidth,
+            padding: this.state.padding, margin: this.state.margin, text: this.state.text, borderColor: this.state.borderColor});
+    }
+
+    handleTextColorChange = (event) => {
+        console.log("handleTextColorChange to " + event.target.value);
+        this.setState({ color: event.target.value, fontSize: this.state.fontSize, backgroundColor: this.state.backgroundColor,
+                        borderColor: this.state.borderColor, borderRadius: this.state.borderRadius, borderWidth: this.state.borderWidth,
+                        padding: this.state.padding, margin: this.state.margin, text: this.state.text});
+    }
+
+    handleFontSizeChange = (event) => {
+        console.log("handleFontSizeChangeComplete to " + event.target.value);
+        this.setState({ fontSize: event.target.value, color: this.state.color, backgroundColor: this.state.backgroundColor,
+                        borderColor: this.state.borderColor, borderRadius: this.state.borderRadius, borderWidth: this.state.borderWidth,
+                        padding: this.state.padding, margin: this.state.margin, text: this.state.text});
+    }
+
+    handleBorderRadiusChange = (event) => {
+        console.log("handleBorderRadiusChange to " + event.target.value);
+        this.setState({ borderRadius: event.target.value, fontSize: this.state.fontSize, color: this.state.color, 
+                        backgroundColor: this.state.backgroundColor, borderColor: this.state.borderColor, borderWidth: this.state.borderWidth,
+                        padding: this.state.padding, margin: this.state.margin, text: this.state.text});
+    }
+    
+    handleBorderWidthChange = (event) => {
+        console.log("handleBorderWidthChange to " + event.target.value);
+        this.setState({ borderWidth: event.target.value, borderRadius: this.state.borderRadius, fontSize: this.state.fontSize, color: this.state.color, 
+                        backgroundColor: this.state.backgroundColor, borderColor: this.state.borderColor,
+                        padding: this.state.padding, margin: this.state.margin, text: this.state.text});
+    }
+    
+    handlePaddingChange = (event) => {
+        console.log("handlePaddingChange to " + event.target.value);
+        this.setState({ padding: event.target.value, borderWidth: this.state.borderWidth, borderRadius: this.state.borderRadius, fontSize: this.state.fontSize, color: this.state.color, 
+                        backgroundColor: this.state.backgroundColor, borderColor: this.state.borderColor, margin: this.state.margin, text: this.state.text});
+    }
+
+    handleMarginChange = (event) => {
+        console.log("handleMarginChange to " + event.target.value);
+        this.setState({ margin: event.target.value, borderWidth: this.state.borderWidth, borderRadius: this.state.borderRadius, fontSize: this.state.fontSize, color: this.state.color, 
+                        backgroundColor: this.state.backgroundColor, borderColor: this.state.borderColor, padding: this.state.padding, text: this.state.text});
+    }
+
+    handleBackgroundColorChange = (event) => {
+        console.log("handleBackGroundColorChangeComplete to " + event.target.value);
+        this.setState({ backgroundColor: event.target.value, color: this.state.color, fontSize: this.state.fontSize, 
+                        borderColor: this.state.borderColor, borderRadius: this.state.borderRadius, borderWidth: this.state.borderWidth,
+                        padding: this.state.padding, margin: this.state.margin, text: this.state.text});
+    }
+
+    handleBorderColorChange = (event) => {
+        console.log("handleBorderColorChangeComplete to " + event.target.value);
+        this.setState({ borderColor: event.target.value, backgroundColor: this.state.backgroundColor, color: this.state.color, 
+                    fontSize: this.state.fontSize, borderRadius: this.state.borderRadius, borderWidth: this.state.borderWidth,
+                    padding: this.state.padding, margin: this.state.margin, text: this.state.text});
+    }
 
     render() {
         let text, color, backgroundColor, borderColor, fontSize, borderRadius, borderWidth, padding, margin;
+
+        const styles = {
+            container: {
+                text: this.state.text,
+                color: this.state.color,
+                fontSize: this.state.fontSize + "pt",
+                background: this.state.backgroundColor,
+                borderColor: this.state.borderColor,
+                borderRadius: this.state.borderRadius +  "px",
+                borderWidth: this.state.borderWidth + "px",
+                borderStyle: "solid",
+                padding: this.state.padding + "px",
+                margin: this.state.margin + "px"
+            }
+        }
         return (
             <Mutation mutation={ADD_LOGO} onCompleted={() => this.props.history.push('/')}>
                 {(addLogo, { loading, error }) => (
@@ -48,7 +142,8 @@ class CreateLogoScreen extends Component {
                             <h3 className="panel-title">
                                 Create Logo
                             </h3>
-                            <div className="panel-body">
+                            <div className="row">
+                            <div className="panel-body" style={{width:"33.3333%"}}>
                                 <form onSubmit={e => {
                                     e.preventDefault();
                                     addLogo({ variables: { text: text.value, color: color.value, backgroundColor: backgroundColor.value, 
@@ -69,60 +164,68 @@ class CreateLogoScreen extends Component {
                                         <label htmlFor="text">Text:</label>
                                         <input type="text" className="form-control" name="text" ref={node => {
                                             text = node;
-                                        }} placeholder="Text" />
+                                        }} placeholder={this.state.text} value = {this.state.tempText} onChange = {this.handleInput}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="color">Color:</label>
                                         <input type="color" className="form-control" name="color" ref={node => {
                                             color = node;
-                                        }} placeholder="Color" />
+                                        }} placeholder={this.state.color} value = {this.state.color} onChange = {this.handleTextColorChange} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="backgroundColor">Background Color:</label>
                                         <input type="color" className="form-control" name="backgroundColor" ref={node => {
                                             backgroundColor = node;
-                                        }} placeholder="Background Color" />
+                                        }} placeholder={this.state.backgroundColor} onChange={this.handleBackgroundColorChange} value={this.state.backgroundColor}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="borderColor">Border Color:</label>
                                         <input type="color" className="form-control" name="borderColor" ref={node => {
                                             borderColor = node;
-                                        }} placeholder="Border Color" />
+                                        }} placeholder={this.state.borderColor} onChange={this.handleBorderColorChange} value={this.state.borderColor}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="fontSize">Font Size:</label>
                                         <input type="number" className="form-control" name="fontSize" ref={node => {
                                             fontSize = node;
-                                        }} placeholder="Font Size" />
+                                        }} placeholder={this.state.fontSize} onChange={this.handleFontSizeChange} value={this.state.fontSize}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="borderRadius">Border Radius:</label>
                                         <input type="number" className="form-control" name="borderRadius" ref={node => {
                                             borderRadius = node;
-                                        }} placeholder="Border Radius" />
+                                        }} placeholder={this.state.borderRadius} onChange={this.handleBorderRadiusChange} value={this.state.borderRadius}/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="borderWidth">Border Width:</label>
                                         <input type="number" className="form-control" name="borderWidth" ref={node => {
                                             borderWidth = node;
-                                        }} placeholder="Border Width" />
+                                        }} placeholder={this.state.borderWidth} onChange={this.handleBorderWidthChange} value={this.state.borderWidth} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="padding">Padding:</label>
                                         <input type="number" className="form-control" name="padding" ref={node => {
                                             padding = node;
-                                        }} placeholder="Padding" />
+                                        }} placeholder={this.state.padding} onChange={this.handlePaddingChange} value={this.state.padding} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="margin">Margin:</label>
                                         <input type="number" className="form-control" name="margin" ref={node => {
                                             margin = node;
-                                        }} placeholder="Margin" />
+                                        }} placeholder={this.state.margin} onChange={this.handleMarginChange} value={this.state.margin}/>
                                     </div>
                                     <button type="submit" className="btn btn-success">Submit</button>
                                 </form>
                                 {loading && <p>Loading...</p>}
                                 {error && <p>Error :( Please try again</p>}
+                            </div>
+                            <div className="col s8" style={{width:"66.66666%"}}> 
+                                <div>
+                                    <div className="pre" style={ styles.container }>
+                                        {this.state.tempText}
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>

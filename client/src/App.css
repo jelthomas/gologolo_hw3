@@ -109,3 +109,9 @@ nav .nav-wrapper {
   white-space: pre;
   overflow: hidden;
 }
+
+.row{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}

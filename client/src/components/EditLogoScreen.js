@@ -49,9 +49,47 @@ const UPDATE_LOGO = gql`
 `;
 
 class EditLogoScreen extends Component {
+    constructor() {
+        super();
+
+        // WE'LL MANAGE THE UI CONTROL
+        // VALUES HERE
+        this.state = {
+            tempText: '',
+            text: "goLogoLo Logo",
+            color : "#FF0000",
+            fontSize : 24,
+            backgroundColor: "#FF0000",
+            borderColor: "#FFFFFF",
+            borderRadius: 0,
+            margin: 0,
+            padding: 0
+        }
+    }
+
+    handleInput = (event) => {
+        console.log(this.state.tempText);
+        this.setState({tempText: event.target.value, backgroundColor: this.logo.backgroundColor, color: this.logo.textColor, 
+            fontSize: this.logo.fontSize, borderRadius: this.logo.borderRadius, borderWidth: this.logo.borderWidth,
+            padding: this.logo.padding, margin: this.logo.margin, text: this.logo.text, borderColor: this.logo.borderColor});
+    }
 
     render() {
         let text, color, backgroundColor, borderColor, fontSize, borderRadius, borderWidth, padding, margin;
+        const styles = {
+            container: {
+                text: this.logo.text,
+                color: this.logo.textColor,
+                fontSize: this.logo.fontSize + "pt",
+                background: this.logo.backgroundColor,
+                borderColor: this.logo.borderColor,
+                borderRadius: this.logo.borderRadius +  "px",
+                borderWidth: this.logo.borderWidth + "px",
+                borderStyle: "solid",
+                padding: this.logo.padding + "px",
+                margin: this.logo.margin + "px"
+            }
+        }
         return (
             <Query query={GET_LOGO} variables={{ logoId: this.props.match.params.id }}>
                 {({ loading, error, data }) => {
@@ -62,14 +100,17 @@ class EditLogoScreen extends Component {
                         <Mutation mutation={UPDATE_LOGO} key={data.logo._id} onCompleted={() => this.props.history.push(`/`)}>
                             {(updateLogo, { loading, error }) => (
                                 <div className="container">
-                                    <div className="panel panel-default">
-                                        <div className="panel-heading">
-                                            <h4><Link to="/">Home</Link></h4>
-                                            <h3 className="panel-title">
-                                                Edit Logo
-                                        </h3>
+                                    <nav>
+                                        <div className="nav-wrapper">
+                                            <div className="panel-heading">
+                                                <div><Link style={{color:"white"}} id="homeButton" to="/">Home</Link></div>
+                                            </div>
                                         </div>
-                                        <div className="panel-body">                                            
+                                    </nav>
+                                    <h3 className="panel-title">
+                                        Edit Logo
+                                    </h3>
+                                        <div className="panel-body" style={{width:"33.33333%"}}>                                            
                                             <form onSubmit={e => {
                                                 e.preventDefault();
                                                 updateLogo({ variables: { id: data.logo._id, text: text.value, color: color.value, backgroundColor: backgroundColor.value,
@@ -89,7 +130,7 @@ class EditLogoScreen extends Component {
                                                     <label htmlFor="text">Text:</label>
                                                     <input type="text" className="form-control" name="text" ref={node => {
                                                         text = node;
-                                                    }} placeholder="Text" defaultValue={data.logo.text} />
+                                                    }} placeholder="Text" defaultValue={data.logo.text} value = {this.state.tempText} onChange = {this.handleInput}/>
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="color">Color:</label>
@@ -145,7 +186,6 @@ class EditLogoScreen extends Component {
                                             {error && <p>Error :( Please try again</p>}
                                         </div>
                                     </div>
-                                </div>
                             )}
                         </Mutation>
                     );
