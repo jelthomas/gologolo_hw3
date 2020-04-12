@@ -259,7 +259,7 @@ class CreateLogoScreen extends Component {
                                 {loading && <p>Loading...</p>}
                                 {error && <p>Error :( Please try again</p>}
                             </div>
-                            <div className="col s8" style={{width:"66.66666%", marginTop: "0.5rem", marginLeft: "0.5rem"}}> 
+                            <div className="col s8" style={{width:"66.66666%", height: "max-content", marginTop: "0.5rem", marginLeft: "0.5rem"}}> 
                                 <div>
                                     <pre className="logo" style={ styles.container }>
                                         {this.state.tempText}
