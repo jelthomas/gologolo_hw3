@@ -130,12 +130,12 @@ class EditLogoScreen extends Component {
     }
 
     checkNull = () => {
-        var values = ['text', 'fontSize', 'borderRadius', 'borderWidth', 'padding', 'margin']
+        var names = ['text', 'fontSize', 'borderRadius', 'borderWidth', 'padding', 'margin']
         var text = document.forms["myForm"]['text'].value;
-        for(let i = 0; i < values.length; i++){
-            var x = document.forms["myForm"][values[i]].value;
+        for(let i = 0; i < names.length; i++){
+            var x = document.forms["myForm"][names[i]].value;
             if (x == "") {
-                alert(values[i] + " must be filled out!");
+                alert(names[i] + " must be filled out!");
                 return false;
             }
             if(text.trim().length == 0){
