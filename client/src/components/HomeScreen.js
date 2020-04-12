@@ -18,11 +18,16 @@ class HomeScreen extends Component {
 
     render() {
         return (
-            <Query pollInterval={500} query={GET_LOGOS}>
+            <Query pollInterval={50} query={GET_LOGOS}>
                 {({ loading, error, data }) => {
                     if (loading) return 'Loading...';
                     if (error) return `Error! ${error.message}`;
-
+                    data.logos.sort((a, b) => (b.lastUpdate > a.lastUpdate)? 1:-1);
+                    for(let i=0; i < data.logos.length; i++){
+                        if(data.logos[i].text.length >= 30){
+                            data.logos[i].text = data.logos[i].text.substring(0, 30) + " ...";
+                        }
+                    }
                     return (
                         <div className="container row">
                             <div className="col s4">

@@ -31,73 +31,119 @@ const DELETE_LOGO = gql`
 `;
 
 class ViewLogoScreen extends Component {
-    constructor() {
-        super();
-
-        // WE'LL MANAGE THE UI CONTROL
-        // VALUES HERE
-        this.state = {
-            tempText: null,
-            text: null,
-            color : "#FFFFFF",
-            fontSize : 24,
-            backgroundColor: "#FF0000",
-            borderColor: "#FFFFFF",
-            borderRadius: 0,
-            borderWidth: 0,
-            margin: 0,
-            padding: 0
-        }
-    }
 
     render() {
         
         return (
-            <Query pollInterval={500} query={GET_LOGO} variables={{ logoId: this.props.match.params.id }}>
+            <Query pollInterval={50} query={GET_LOGO} variables={{ logoId: this.props.match.params.id }}>
                 {({ loading, error, data }) => {
                     if (loading) return 'Loading...';
                     if (error) return `Error! ${error.message}`;
                     return (
                         <div className="container">
-                            <nav>
-                                <div className="nav-wrapper">
-                                    <div className="panel-heading">
-                                        <div><Link style={{color:"white"}} id="homeButton" to="/">Home</Link></div>
-                                    </div>
-                                </div>
-                            </nav>
-                            <h3 className="panel-title">
-                                View Logo
-                            </h3>
-                            <div className = "row">
-                            <div className="panel panel-default" style={{width:"33.3333%"}}>
-                                <div className="panel-body">
-                                    <dl>
-                                        <dt>Text:</dt>
-                                        <dd>{data.logo.text}</dd>
-                                        <dt>Color:</dt>
-                                        <dd>{data.logo.color}</dd>
-                                        <dt>Background Color:</dt>
-                                        <dd>{data.logo.backgroundColor}</dd>
-                                        <dt>Border Color:</dt>
-                                        <dd>{data.logo.borderColor}</dd>
-                                        <dt>Font Size:</dt>
-                                        <dd>{data.logo.fontSize}</dd>
-                                        <dt>Border Radius:</dt>
-                                        <dd>{data.logo.borderRadius}</dd>
-                                        <dt>Border Width:</dt>
-                                        <dd>{data.logo.borderWidth}</dd>
-                                        <dt>Padding:</dt>
-                                        <dd>{data.logo.padding}</dd>
-                                        <dt>Margin:</dt>
-                                        <dd>{data.logo.margin}</dd>
-                                        <dt>Last Updated:</dt>
-                                        <dd>{data.logo.lastUpdate}</dd>
-                                    </dl>
-                                    <Mutation mutation={DELETE_LOGO} key={data.logo._id} onCompleted={() => this.props.history.push('/')}>
+                                <div className="panel panel-default">
+                                    <nav className="shadow">
+                                        <div className="nav-wrapper">
+                                            <div className="panel-heading">
+                                                <div><Link style={{color:"white"}} id="homeButton" to="/">Home</Link></div>
+                                            </div>
+                                        </div>
+                                    </nav>
+                                    <div className="row">
+                                    <div className="panel-body" style={{WebkitBoxShadow: "0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2)", width:"33.3333%", marginTop: "0.5rem", borderRadius: "5px", backgroundColor: "white", paddingLeft: "0.75rem", paddingRight: "0.75rem", display: "inline-table"}}>
+                                            <div className="panel-title" style={{textAlign: "center", backgroundColor: "#546e7a", color: "white", marginTop: "0.5rem", marginBottom: "1rem", borderRadius: "5px"}}>
+                                                <div style={{paddingTop: "0.5rem", paddingBottom: "0.5rem", fontSize: "30pt"}}>
+                                                    View Logo
+                                                </div>
+                                            </div>
+                                            <div style={{backgroundColor: "#546e7a", color:"white", paddingLeft: "20px"}}> 
+                                                <div className="row" style={{paddingTop: "20px"}}>
+                                                    <div className="form-group">
+                                                        <div className="col s4" >Text:</div>
+                                                        <div className="col s8" style={{display: "inline-grid"}}>
+                                                        <pre style={{color:"white"}}>
+                                                        {data.logo.text}
+                                                        </pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="form-group">
+                                                        <div className="col s4">Color:</div>
+                                                        <div className="col s8" style={{alignItems: "right"}}>
+                                                        {data.logo.color}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="form-group">
+                                                        <div className="col s4">Background Color:</div>
+                                                        <div className="col s8">
+                                                        {data.logo.backgroundColor}
+                                                        </div>
+                                                    </div>
+                                                </div>   
+                                                <div className="row">
+                                                    <div className="form-group">
+                                                        <div className="col s4">Border Color:</div>
+                                                        <div className="col s8">
+                                                        {data.logo.borderColor}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="form-group">
+                                                        <div className="col s4">Font Size:</div>
+                                                        <div className="col s8">
+                                                        {data.logo.fontSize}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="form-group">
+                                                        <div className="col s4">Border Radius:</div>
+                                                        <div className="col s8">
+                                                        {data.logo.borderRadius}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="form-group">
+                                                        <div className="col s4">Border Width:</div>
+                                                        <div className="col s8">
+                                                        {data.logo.borderWidth}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="form-group">
+                                                        <div className="col s4">Padding:</div>
+                                                        <div className="col s8">
+                                                        {data.logo.padding}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="form-group">
+                                                        <div className="col s4">Margin:</div>
+                                                        <div className="col s8">
+                                                        {data.logo.margin}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="form-group">
+                                                        <div className="col s4">Last Update:</div>
+                                                        <div className="col s8">
+                                                            {data.logo.lastUpdate}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <Mutation mutation={DELETE_LOGO} key={data.logo._id} onCompleted={() => this.props.history.push('/')}>
                                         {(removeLogo, { loading, error }) => (
-                                            <div>
-                                                <form
+                                            <div style={{marginBottom:"1.5rem", textAlign:"center"}}>
+                                                <form 
                                                     onSubmit={e => {
                                                         e.preventDefault();
                                                         removeLogo({ variables: { id: data.logo._id } });
@@ -110,9 +156,10 @@ class ViewLogoScreen extends Component {
                                             </div>
                                         )}
                                     </Mutation>
-                                </div>
-                            </div>
-                            <div className="col s8" style={{width:"66.66666%"}}> 
+                                        {loading && <p>Loading...</p>}
+                                        {error && <p>Error :( Please try again</p>}
+                                    </div>
+                                    <div className="col s8" style={{width:"66.66666%", marginTop: "0.5rem", marginLeft: "0.5rem"}}> 
                                 <div>
                                     <pre className="logo" style={{text: data.logo.text, color: data.logo.color, fontSize: data.logo.fontSize,
                                 background: data.logo.backgroundColor,
@@ -124,8 +171,9 @@ class ViewLogoScreen extends Component {
                                     </pre>
                                 </div>
                             </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                     );
                 }}
             </Query>

@@ -132,18 +132,15 @@ class CreateLogoScreen extends Component {
                 {(addLogo, { loading, error }) => (
                     <div className="container">
                         <div className="panel panel-default">
-                            <nav>
+                            <nav className="shadow">
                                 <div className="nav-wrapper">
                                     <div className="panel-heading">
                                         <div><Link style={{color:"white"}} id="homeButton" to="/">Home</Link></div>
                                     </div>
                                 </div>
                             </nav>
-                            <h3 className="panel-title">
-                                Create Logo
-                            </h3>
                             <div className="row">
-                            <div className="panel-body" style={{width:"33.3333%"}}>
+                            <div className="panel-body" style={{WebkitBoxShadow: "0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2)", width:"33.3333%", display: "inline-table", marginTop: "0.5rem", borderRadius: "5px", backgroundColor: "white", paddingLeft: "0.75rem", paddingRight: "0.75rem"}}>
                                 <form onSubmit={e => {
                                     e.preventDefault();
                                     addLogo({ variables: { text: text.value, color: color.value, backgroundColor: backgroundColor.value, 
@@ -160,66 +157,109 @@ class CreateLogoScreen extends Component {
                                     padding.value = "";
                                     margin.value = "";
                                 }}>
-                                    <div className="form-group">
-                                        <label htmlFor="text">Text:</label>
-                                        <input type="text" className="form-control" name="text" ref={node => {
-                                            text = node;
-                                        }} placeholder={this.state.text} value = {this.state.tempText} onChange = {this.handleInput}/>
+                                    <div className="panel-title" style={{textAlign: "center", backgroundColor: "#546e7a", color: "white", marginTop: "0.5rem", marginBottom: "1rem", borderRadius: "5px"}}>
+                                        <div style={{paddingTop: "0.5rem", paddingBottom: "0.5rem", fontSize: "30pt"}}>
+                                            Create Logo
+                                        </div>
                                     </div>
-                                    <div className="form-group">
-                                        <label htmlFor="color">Color:</label>
-                                        <input type="color" className="form-control" name="color" ref={node => {
-                                            color = node;
-                                        }} placeholder={this.state.color} value = {this.state.color} onChange = {this.handleTextColorChange} />
+                                    <div style={{backgroundColor: "#546e7a", color:"white", paddingLeft: "20px"}}> 
+                                        <div className="row" style={{paddingTop: "20px"}}>
+                                            <div className="form-group">
+                                                <div className="col s4" >Text:</div>
+                                                <div className="col s8">
+                                                    <input type="text" className="form-control" name="text" ref={node => {
+                                                        text = node;
+                                                    }} placeholder={this.state.text} value = {this.state.tempText} onChange = {this.handleInput}/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <div className="col s4">Color:</div>
+                                                <div className="col s8" style={{alignItems: "right"}}>
+                                                    <input type="color" className="form-control" name="color" ref={node => {
+                                                        color = node;
+                                                    }} placeholder={this.state.color} value = {this.state.color} onChange = {this.handleTextColorChange} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <div className="col s4">Background Color:</div>
+                                                <div className="col s8">
+                                                    <input type="color" className="form-control" name="backgroundColor" ref={node => {
+                                                        backgroundColor = node;
+                                                    }} placeholder={this.state.backgroundColor} onChange={this.handleBackgroundColorChange} value={this.state.backgroundColor}/>
+                                                </div>
+                                            </div>
+                                        </div>   
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <div className="col s4">Border Color:</div>
+                                                <div className="col s8">
+                                                    <input type="color" className="form-control" name="borderColor" ref={node => {
+                                                        borderColor = node;
+                                                    }} placeholder={this.state.borderColor} onChange={this.handleBorderColorChange} value={this.state.borderColor}/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <div className="col s4">Font Size:</div>
+                                                <div className="col s8">
+                                                    <input type="number" min="0" max="144" className="form-control" name="fontSize" ref={node => {
+                                                        fontSize = node;
+                                                    }} placeholder={this.state.fontSize} onChange={this.handleFontSizeChange} value={this.state.fontSize}/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <div className="col s4">Border Radius:</div>
+                                                <div className="col s8">
+                                                    <input type="number" min="0" max="200" className="form-control" name="borderRadius" ref={node => {
+                                                        borderRadius = node;
+                                                    }} placeholder={this.state.borderRadius} onChange={this.handleBorderRadiusChange} value={this.state.borderRadius}/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <div className="col s4">Border Width:</div>
+                                                <div className="col s8">
+                                                    <input type="number" min="0" max="200" className="form-control" name="borderWidth" ref={node => {
+                                                        borderWidth = node;
+                                                    }} placeholder={this.state.borderWidth} onChange={this.handleBorderWidthChange} value={this.state.borderWidth} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <div className="col s4">Padding:</div>
+                                                <div className="col s8">
+                                                    <input type="number" min="0" max="200" className="form-control" name="padding" ref={node => {
+                                                        padding = node;
+                                                    }} placeholder={this.state.padding} onChange={this.handlePaddingChange} value={this.state.padding} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <div className="col s4">Margin:</div>
+                                                <div className="col s8">
+                                                    <input type="number" min="0" max="200" className="form-control" name="margin" ref={node => {
+                                                        margin = node;
+                                                    }} placeholder={this.state.margin} onChange={this.handleMarginChange} value={this.state.margin}/>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="form-group">
-                                        <label htmlFor="backgroundColor">Background Color:</label>
-                                        <input type="color" className="form-control" name="backgroundColor" ref={node => {
-                                            backgroundColor = node;
-                                        }} placeholder={this.state.backgroundColor} onChange={this.handleBackgroundColorChange} value={this.state.backgroundColor}/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="borderColor">Border Color:</label>
-                                        <input type="color" className="form-control" name="borderColor" ref={node => {
-                                            borderColor = node;
-                                        }} placeholder={this.state.borderColor} onChange={this.handleBorderColorChange} value={this.state.borderColor}/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="fontSize">Font Size:</label>
-                                        <input type="number" className="form-control" name="fontSize" ref={node => {
-                                            fontSize = node;
-                                        }} placeholder={this.state.fontSize} onChange={this.handleFontSizeChange} value={this.state.fontSize}/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="borderRadius">Border Radius:</label>
-                                        <input type="number" className="form-control" name="borderRadius" ref={node => {
-                                            borderRadius = node;
-                                        }} placeholder={this.state.borderRadius} onChange={this.handleBorderRadiusChange} value={this.state.borderRadius}/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="borderWidth">Border Width:</label>
-                                        <input type="number" className="form-control" name="borderWidth" ref={node => {
-                                            borderWidth = node;
-                                        }} placeholder={this.state.borderWidth} onChange={this.handleBorderWidthChange} value={this.state.borderWidth} />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="padding">Padding:</label>
-                                        <input type="number" className="form-control" name="padding" ref={node => {
-                                            padding = node;
-                                        }} placeholder={this.state.padding} onChange={this.handlePaddingChange} value={this.state.padding} />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="margin">Margin:</label>
-                                        <input type="number" className="form-control" name="margin" ref={node => {
-                                            margin = node;
-                                        }} placeholder={this.state.margin} onChange={this.handleMarginChange} value={this.state.margin}/>
-                                    </div>
-                                    <button type="submit" className="btn btn-success">Submit</button>
+                                    <button type="submit" className="btn btn-success" style={{marginBottom: "1rem", marginLeft: "7.5rem"}}>Submit</button>
                                 </form>
                                 {loading && <p>Loading...</p>}
                                 {error && <p>Error :( Please try again</p>}
                             </div>
-                            <div className="col s8" style={{width:"66.66666%"}}> 
+                            <div className="col s8" style={{width:"66.66666%", marginTop: "0.5rem", marginLeft: "0.5rem"}}> 
                                 <div>
                                     <pre className="logo" style={ styles.container }>
                                         {this.state.tempText}
